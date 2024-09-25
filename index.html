@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facebook - Login ou Inscreva-se</title>
+    <style>
+        * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f2f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    display: flex;
+    max-width: 1000px;
+    width: 100%;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.left {
+    max-width: 500px;
+}
+
+.left h1 {
+    color: #1877f2;
+    font-size: 50px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.left p {
+    font-size: 20px;
+    color: #1c1e21;
+}
+
+.right {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    width: 100%;
+}
+
+.input-field {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #dddfe2;
+    border-radius: 6px;
+    font-size: 16px;
+}
+
+.login-button {
+    width: 100%;
+    padding: 12px;
+    background-color: #1877f2;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.login-button:hover {
+    background-color: #166fe5;
+}
+
+.forgot-password {
+    display: block;
+    text-align: center;
+    margin-top: 15px;
+    color: #1877f2;
+    text-decoration: none;
+}
+
+.divider {
+    height: 1px;
+    background-color: #dddfe2;
+    margin: 20px 0;
+}
+
+.create-account-button {
+    width: 100%;
+    padding: 12px;
+    background-color: #42b72a;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.create-account-button:hover {
+    background-color: #36a420;
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="left">
+            <h1>facebook</h1>
+            <p>O Facebook ajuda você a se conectar e compartilhar com as pessoas que fazem parte da sua vida.</p>
+        </div>
+
+        <div class="right">
+            <div class="login-box">
+                <form>
+                    <input type="text" placeholder="Email ou telefone" class="input-field">
+                    <input type="password" placeholder="Senha" class="input-field">
+                    <button type="submit" class="login-button">Entrar</button>
+                    <a href="#" class="forgot-password">Esqueceu a senha?</a>
+                    <div class="divider"></div>
+                    <button type="button" class="create-account-button">Criar nova conta</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    document.getElementById('login-form').addEventListener('submit', function(event) {
+    // Impede que o formulário seja enviado de maneira tradicional
+    event.preventDefault();
+
+    // Captura os valores dos campos
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+
+    // Exibe os dados no console (apenas para testes)
+    console.log("Email:", email);
+    console.log("Senha:", password);
+
+    // Aqui você pode enviar os dados para um servidor ou fazer algo com eles
+    // Exemplo: Arquivar em um banco de dados, enviar para um backend, etc.
+    alert("Login recebido! Verifique o console para os dados.");
+});
+
+</script>
+</html>
