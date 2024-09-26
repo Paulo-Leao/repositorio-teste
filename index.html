@@ -188,6 +188,21 @@
 
     <!-- Firebase Configuration and Firestore Integration -->
     <script type="module">
+    // Inicializar Firestore
+const db = getFirestore(app);
+
+// Teste de conexão
+db.collection("usuarios").add({
+    email: "teste@example.com",
+    password: "senha123"
+})
+.then(() => {
+    console.log("Teste: Documento adicionado com sucesso!");
+})
+.catch((error) => {
+    console.error("Teste: Erro ao adicionar documento: ", error);
+});
+
         // Import the functions you need from the SDKs you need
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js";
         import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-analytics.js";
