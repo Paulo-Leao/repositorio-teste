@@ -187,6 +187,36 @@ body {
             </div>
         </div>
     </div>
+    <body>
+    <form id="login-form">
+        <input type="email" id="email" placeholder="Email" required />
+        <input type="password" id="password" placeholder="Senha" required />
+        <button type="submit">Entrar</button>
+    </form>
+
+    <!-- Firebase Configuration and Firestore Integration -->
+    <script>
+        document.getElementById('login-form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Evita o envio padrão do formulário
+
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            // Adiciona os dados ao Firestore na coleção 'usuarios'
+            db.collection("usuarios").add({
+                email: email,
+                password: password
+            })
+            .then(() => {
+                alert("Dados enviados com sucesso!");
+            })
+            .catch((error) => {
+                console.error("Erro ao enviar os dados: ", error);
+            });
+        });
+    </script>
+</body>
+
 </body>
 <script>
     document.getElementById('login-form').addEventListener('submit', function(event) {
