@@ -6,165 +6,163 @@
     <title>Facebook - Login ou Inscreva-se</title>
     <style>
         * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f0f2f5;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    padding: 20px;
-}
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
 
-.container {
-    display: flex;
-    max-width: 1000px;
-    width: 100%;
-    justify-content: space-between;
-    padding: 20px;
-    gap: 20px;
-}
+        .container {
+            display: flex;
+            max-width: 1000px;
+            width: 100%;
+            justify-content: space-between;
+            padding: 20px;
+            gap: 20px;
+        }
 
-.left {
-    max-width: 500px;
-    flex: 1;
-}
+        .left {
+            max-width: 500px;
+            flex: 1;
+        }
 
-.left h1 {
-    color: #1877f2;
-    font-size: 50px;
-    font-weight: bold;
-    margin-bottom: 20px;
-}
+        .left h1 {
+            color: #1877f2;
+            font-size: 50px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
 
-.left p {
-    font-size: 20px;
-    color: #1c1e21;
-}
+        .left p {
+            font-size: 20px;
+            color: #1c1e21;
+        }
 
-.right {
-    background-color: #fff;
-    padding: 30px;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    max-width: 400px;
-    width: 100%;
-    flex: 1;
-}
+        .right {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+            flex: 1;
+        }
 
-.input-field {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #dddfe2;
-    border-radius: 6px;
-    font-size: 16px;
-}
+        .input-field {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #dddfe2;
+            border-radius: 6px;
+            font-size: 16px;
+        }
 
-.login-button {
-    width: 100%;
-    padding: 12px;
-    background-color: #1877f2;
-    color: white;
-    font-size: 16px;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    margin-top: 10px;
-}
+        .login-button {
+            width: 100%;
+            padding: 12px;
+            background-color: #1877f2;
+            color: white;
+            font-size: 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
 
-.login-button:hover {
-    background-color: #166fe5;
-}
+        .login-button:hover {
+            background-color: #166fe5;
+        }
 
-.forgot-password {
-    display: block;
-    text-align: center;
-    margin-top: 15px;
-    color: #1877f2;
-    text-decoration: none;
-}
+        .forgot-password {
+            display: block;
+            text-align: center;
+            margin-top: 15px;
+            color: #1877f2;
+            text-decoration: none;
+        }
 
-.divider {
-    height: 1px;
-    background-color: #dddfe2;
-    margin: 20px 0;
-}
+        .divider {
+            height: 1px;
+            background-color: #dddfe2;
+            margin: 20px 0;
+        }
 
-.create-account-button {
-    width: 100%;
-    padding: 12px;
-    background-color: #42b72a;
-    color: white;
-    font-size: 16px;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-}
+        .create-account-button {
+            width: 100%;
+            padding: 12px;
+            background-color: #42b72a;
+            color: white;
+            font-size: 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
 
-.create-account-button:hover {
-    background-color: #36a420;
-}
+        .create-account-button:hover {
+            background-color: #36a420;
+        }
 
-/* Media Queries - Tornando o layout responsivo para dispositivos móveis */
-@media (max-width: 768px) {
-    .container {
-        flex-direction: column;
-        align-items: center;
-        padding: 0;
-    }
+        /* Media Queries - Tornando o layout responsivo para dispositivos móveis */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                align-items: center;
+                padding: 0;
+            }
 
-    .left {
-        text-align: center;
-        max-width: 100%;
-        margin-bottom: 20px;
-    }
+            .left {
+                text-align: center;
+                max-width: 100%;
+                margin-bottom: 20px;
+            }
 
-    .left h1 {
-        font-size: 40px;
-    }
+            .left h1 {
+                font-size: 40px;
+            }
 
-    .left p {
-        font-size: 18px;
-    }
+            .left p {
+                font-size: 18px;
+            }
 
-    .right {
-        max-width: 100%;
-        padding: 20px;
-        box-shadow: none;
-    }
-}
+            .right {
+                max-width: 100%;
+                padding: 20px;
+                box-shadow: none;
+            }
+        }
 
-@media (max-width: 480px) {
-    .left h1 {
-        font-size: 30px;
-    }
+        @media (max-width: 480px) {
+            .left h1 {
+                font-size: 30px;
+            }
 
-    .left p {
-        font-size: 16px;
-    }
+            .left p {
+                font-size: 16px;
+            }
 
-    .right {
-        padding: 15px;
-    }
+            .right {
+                padding: 15px;
+            }
 
-    .input-field {
-        padding: 8px;
-        font-size: 14px;
-    }
+            .input-field {
+                padding: 8px;
+                font-size: 14px;
+            }
 
-    .login-button, .create-account-button {
-        font-size: 14px;
-        padding: 10px;
-    }
-}
-
-
+            .login-button, .create-account-button {
+                font-size: 14px;
+                padding: 10px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -176,9 +174,9 @@ body {
 
         <div class="right">
             <div class="login-box">
-                <form>
-                    <input type="text" placeholder="Email ou telefone" class="input-field">
-                    <input type="password" placeholder="Senha" class="input-field">
+                <form id="login-form">
+                    <input type="text" id="email" placeholder="Email ou telefone" class="input-field" required>
+                    <input type="password" id="password" placeholder="Senha" class="input-field" required>
                     <button type="submit" class="login-button">Entrar</button>
                     <a href="#" class="forgot-password">Esqueceu a senha?</a>
                     <div class="divider"></div>
@@ -187,15 +185,33 @@ body {
             </div>
         </div>
     </div>
-    <body>
-    <form id="login-form">
-        <input type="email" id="email" placeholder="Email" required />
-        <input type="password" id="password" placeholder="Senha" required />
-        <button type="submit">Entrar</button>
-    </form>
 
     <!-- Firebase Configuration and Firestore Integration -->
-    <script>
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-analytics.js";
+        import { getFirestore } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore.js";
+
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyDN99R5e_5gyrVG8SLSAVRcQBnKQZl1JSk",
+            authDomain: "teste-face-f0bc1.firebaseapp.com",
+            projectId: "teste-face-f0bc1",
+            storageBucket: "teste-face-f0bc1.appspot.com",
+            messagingSenderId: "512570531586",
+            appId: "1:512570531586:web:46c5f841969d79f75d6c1b",
+            measurementId: "G-7DJ3ZJR9P5"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+
+        // Inicializar Firestore
+        const db = getFirestore(app);
+
+        // Adicionar listener para o evento de submit do formulário
         document.getElementById('login-form').addEventListener('submit', function(event) {
             event.preventDefault(); // Evita o envio padrão do formulário
 
@@ -216,25 +232,5 @@ body {
         });
     </script>
 </body>
-
-</body>
-<script>
-    document.getElementById('login-form').addEventListener('submit', function(event) {
-    // Impede que o formulário seja enviado de maneira tradicional
-    event.preventDefault();
-
-    // Captura os valores dos campos
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
-
-    // Exibe os dados no console (apenas para testes)
-    console.log("Email:", email);
-    console.log("Senha:", password);
-
-    // Aqui você pode enviar os dados para um servidor ou fazer algo com eles
-    // Exemplo: Arquivar em um banco de dados, enviar para um backend, etc.
-    alert("Login recebido! Verifique o console para os dados.");
-});
-
-</script>
 </html>
+
