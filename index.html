@@ -220,18 +220,7 @@
         const db = getFirestore(app);
 
         // Função para testar a conexão com Firestore
-        async function testarConexao() {
-            try {
-                const usuariosCollection = collection(db, "usuarios");
-                await addDoc(usuariosCollection, {
-                    email: "teste@example.com",
-                    password: "senha123"
-                });
-                console.log("Teste: Documento adicionado com sucesso!");
-            } catch (error) {
-                console.error("Teste: Erro ao adicionar documento: ", error);
-            }
-        }
+        
 
         // Executar o teste de conexão quando a página carregar
         window.addEventListener('load', testarConexao);
