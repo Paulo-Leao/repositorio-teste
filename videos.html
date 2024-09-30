@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facebook Vídeos Clone</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #18191a;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        header {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #242526;
+            padding: 10px 20px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 10;
+        }
+
+        header .left, header .right {
+            display: flex;
+            align-items: center;
+        }
+
+        header img {
+            width: 30px;
+            margin-right: 10px;
+        }
+
+        header input {
+            padding: 8px;
+            border-radius: 20px;
+            border: none;
+            outline: none;
+            width: 180px;
+        }
+
+        header .right img {
+            margin-left: 15px;
+            cursor: pointer;
+            width: 25px;
+            height: 25px;
+        }
+
+        .video-container {
+            margin-top: 80px; /* Para evitar o header */
+            width: 100%;
+            max-width: 400px;
+            background-color: #000;
+            position: relative;
+            padding-bottom: 177.78%; /* Proporção de 9:16 (altura/largura) */
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .video-container video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .actions {
+            position: absolute;
+            right: 10px;
+            bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .actions div {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .actions div img {
+            width: 30px;
+            height: 30px;
+        }
+
+        .actions div span {
+            font-size: 12px;
+        }
+
+        .video-details {
+            margin-top: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .video-details img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
+
+        .video-details .author-info {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .video-details .author-info button {
+            padding: 5px 10px;
+            background-color: #1877f2;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+
+        .video-description {
+            margin-top: 10px;
+            color: #b0b3b8;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .video-container {
+                max-width: 100%;
+            }
+
+            header input {
+                width: 120px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="left">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook logo">
+            <input type="text" placeholder="Pesquisar no Facebook">
+        </div>
+        <div class="right">
+            <img src="https://cdn-icons-png.flaticon.com/512/1946/1946436.png" alt="Home Icon">
+            <img src="https://cdn-icons-png.flaticon.com/512/1827/1827364.png" alt="Messenger Icon">
+            <img src="https://cdn-icons-png.flaticon.com/512/1827/1827379.png" alt="Notifications Icon">
+            <img src="https://cdn-icons-png.flaticon.com/512/1946/1946429.png" alt="Profile Icon">
+        </div>
+    </header>
+
+    <div class="video-container">
+        <video src="seu-video.mp4" controls autoplay></video>
+
+        <!-- Ações laterais (curtir, comentar, compartilhar) -->
+        <div class="actions">
+            <div>
+                <img src="https://cdn-icons-png.flaticon.com/512/1077/1077035.png" alt="Curtir Icon">
+                <span>30,4 mil</span>
+            </div>
+            <div>
+                <img src="https://cdn-icons-png.flaticon.com/512/2462/2462719.png" alt="Comentar Icon">
+                <span>6,1 mil</span>
+            </div>
+            <div>
+                <img src="https://cdn-icons-png.flaticon.com/512/2951/2951061.png" alt="Compartilhar Icon">
+                <span>8,7 mil</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="video-details">
+        <img src="https://cdn-icons-png.flaticon.com/512/147/147144.png" alt="Autor Foto">
+        <div class="author-info">
+            <span>Pato arrependido</span>
+            <button>Seguir</button>
+        </div>
+    </div>
+
+    <div class="video-description">
+        <span>Áudio original · Pato arrependido</span>
+    </div>
+
+</body>
+</html>
