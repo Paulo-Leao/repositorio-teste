@@ -19,10 +19,10 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: flex-start; /* Alterado de center para flex-start */
+            justify-content: flex-start; /* Alinha o conteúdo ao topo */
             min-height: 100vh;
             padding: 20px;
-            padding-top: 80px; /* Adicionado para evitar o header fixo */
+            padding-top: 80px; /* Espaço para o header fixo */
         }
 
         header {
@@ -65,13 +65,14 @@
 
         .video-container {
             width: 100%;
-            max-width: 600px; /* Defina um max-width adequado */
+            max-width: 400px; /* Ajuste conforme necessário */
             background-color: #000;
             position: relative;
-            padding-bottom: 56.25%; /* Proporção de 16:9 */
+            padding-bottom: 177.78%; /* Proporção de 9:16 (altura/largura) */
             overflow: hidden;
             margin-bottom: 20px; /* Espaçamento abaixo do vídeo */
-            border-radius: 10px; /* Opcional: adiciona cantos arredondados */
+            border-radius: 10px; /* Opcional: cantos arredondados */
+            aspect-ratio: 9 / 16; /* Proporção fixa de 9:16 */
         }
 
         .video-container video {
@@ -80,7 +81,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            object-fit: contain; /* Use 'cover' se preferir preencher todo o contêiner */
+            object-fit: cover; /* Preenche o contêiner */
         }
 
         .actions {
@@ -143,17 +144,23 @@
             color: #b0b3b8;
             text-align: center;
             font-size: 14px;
-            max-width: 600px; /* Alinhar com o video-container */
+            max-width: 400px; /* Alinha com o video-container */
         }
 
         /* Responsividade */
         @media (max-width: 768px) {
             .video-container {
-                max-width: 100%;
+                max-width: 100%; /* Ocupa toda a largura disponível */
+                padding-bottom: 177.78%; /* Proporção de 9:16 para retrato */
+                aspect-ratio: 9 / 16; /* Proporção fixa de 9:16 */
             }
 
             header input {
                 width: 120px;
+            }
+
+            .video-description {
+                max-width: 100%; /* Alinha com a largura do contêiner */
             }
         }
     </style>
