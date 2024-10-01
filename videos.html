@@ -65,10 +65,10 @@
         .video-container {
             margin-top: 80px; /* Para evitar o header */
             width: 100%;
-            max-width: 400px;
+            max-width: 100%; /* Ajuste de largura */
             background-color: #000;
             position: relative;
-            padding-bottom: 177.78%; /* Proporção de 9:16 (altura/largura) */
+            padding-bottom: 56.25%; /* Proporção de 16:9 */
             overflow: hidden;
             display: flex;
             justify-content: center;
@@ -81,6 +81,7 @@
             left: 0;
             width: 100%;
             height: 100%;
+            object-fit: cover; /* Garante que o vídeo preencha a área */
         }
 
         .actions {
@@ -173,7 +174,7 @@
     </header>
 
     <div class="video-container">
-        <video src="seu-video.mp4" controls autoplay></video>
+        <video src="123testevideo.mp4" controls autoplay></video>
 
         <!-- Ações laterais (curtir, comentar, compartilhar) -->
         <div class="actions">
