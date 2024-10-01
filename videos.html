@@ -19,9 +19,10 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
+            justify-content: flex-start; /* Alterado de center para flex-start */
             min-height: 100vh;
             padding: 20px;
+            padding-top: 80px; /* Adicionado para evitar o header fixo */
         }
 
         header {
@@ -63,16 +64,14 @@
         }
 
         .video-container {
-            margin-top: 80px; /* Para evitar o header */
             width: 100%;
-            max-width: 100%; /* Ajuste de largura */
+            max-width: 600px; /* Defina um max-width adequado */
             background-color: #000;
             position: relative;
             padding-bottom: 56.25%; /* Proporção de 16:9 */
             overflow: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            margin-bottom: 20px; /* Espaçamento abaixo do vídeo */
+            border-radius: 10px; /* Opcional: adiciona cantos arredondados */
         }
 
         .video-container video {
@@ -81,7 +80,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            object-fit: cover; /* Garante que o vídeo preencha a área */
+            object-fit: contain; /* Use 'cover' se preferir preencher todo o contêiner */
         }
 
         .actions {
@@ -110,11 +109,11 @@
         }
 
         .video-details {
-            margin-top: 15px;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 10px;
+            margin-bottom: 10px; /* Espaçamento abaixo dos detalhes do vídeo */
         }
 
         .video-details img {
@@ -137,13 +136,14 @@
             border-radius: 5px;
             cursor: pointer;
             font-size: 12px;
+            margin-top: 5px; /* Espaçamento acima do botão */
         }
 
         .video-description {
-            margin-top: 10px;
             color: #b0b3b8;
             text-align: center;
             font-size: 14px;
+            max-width: 600px; /* Alinhar com o video-container */
         }
 
         /* Responsividade */
