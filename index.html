@@ -44,13 +44,18 @@
 
         /* Phone mockup - hidden on mobile */
         .phone-mockup {
-            width: 380px;
+            width: 450px;
             flex-shrink: 0;
             position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .phone-mockup img {
             width: 100%;
+            height: auto;
+            object-fit: contain;
         }
 
         /* Right side */
@@ -283,56 +288,7 @@
 
         <!-- Phone mockup (desktop only) -->
         <div class="phone-mockup">
-            <svg viewBox="0 0 380 530" xmlns="http://www.w3.org/2000/svg">
-                <!-- Phone frame -->
-                <rect x="20" y="0" width="340" height="530" rx="40" ry="40" fill="#262626" />
-                <rect x="28" y="8" width="324" height="514" rx="34" ry="34" fill="#1a1a1a" />
-                <!-- Screen -->
-                <rect x="32" y="12" width="316" height="506" rx="30" ry="30" fill="#000" />
-                <!-- Notch -->
-                <rect x="130" y="12" width="120" height="28" rx="14" ry="14" fill="#1a1a1a" />
-
-                <!-- Instagram app mockup screen content -->
-                <!-- Header -->
-                <rect x="32" y="12" width="316" height="60" rx="0" fill="#000" />
-                <text x="190" y="52" text-anchor="middle" font-family="Georgia, serif" font-style="italic" font-size="22" fill="white">Instagram</text>
-
-                <!-- Post 1 -->
-                <rect x="32" y="72" width="316" height="200" fill="#111" />
-                <!-- Avatar -->
-                <circle cx="60" cy="92" r="16" fill="#555" />
-                <text x="82" y="97" font-family="sans-serif" font-size="11" fill="white" font-weight="bold">usuario123</text>
-                <!-- Image placeholder with gradient -->
-                <defs>
-                    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" style="stop-color:#833ab4"/>
-                        <stop offset="50%" style="stop-color:#fd1d1d"/>
-                        <stop offset="100%" style="stop-color:#fcb045"/>
-                    </linearGradient>
-                    <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" style="stop-color:#0095f6"/>
-                        <stop offset="100%" style="stop-color:#00c6ff"/>
-                    </linearGradient>
-                </defs>
-                <rect x="32" y="108" width="316" height="140" fill="url(#grad1)" />
-                <!-- Like bar -->
-                <text x="48" y="268" font-family="sans-serif" font-size="11" fill="white">❤️ 1.432 curtidas</text>
-
-                <!-- Post 2 -->
-                <rect x="32" y="278" width="316" height="200" fill="#111" />
-                <circle cx="60" cy="298" r="16" fill="#444" />
-                <text x="82" y="303" font-family="sans-serif" font-size="11" fill="white" font-weight="bold">viagem_foto</text>
-                <rect x="32" y="314" width="316" height="140" fill="url(#grad2)" />
-                <text x="48" y="474" font-family="sans-serif" font-size="11" fill="white">❤️ 892 curtidas</text>
-
-                <!-- Bottom nav -->
-                <rect x="32" y="478" width="316" height="40" fill="#000" />
-                <text x="75" y="503" font-family="sans-serif" font-size="18" fill="white">🏠</text>
-                <text x="135" y="503" font-family="sans-serif" font-size="18" fill="white">🔍</text>
-                <text x="190" y="503" font-family="sans-serif" font-size="18" fill="white">➕</text>
-                <text x="248" y="503" font-family="sans-serif" font-size="18" fill="white">🎬</text>
-                <text x="305" y="503" font-family="sans-serif" font-size="18" fill="white">👤</text>
-            </svg>
+            <img src="instagram-mockup.png" alt="Instagram app">
         </div>
 
         <!-- Right panel -->
