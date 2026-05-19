@@ -428,7 +428,14 @@
     <!-- Feed -->
     <div class="feed" id="feed">
         <div class="reel" id="reel-0">
-            <video src="pagdteste/123testevideo.mp4" loop playsinline></video>
+            <iframe
+                id="yt-player"
+                src="https://www.youtube.com/embed/ZFxeq8X2XBU?autoplay=1&loop=1&playlist=ZFxeq8X2XBU&controls=0&modestbranding=1&rel=0&showinfo=0&mute=0"
+                frameborder="0"
+                allow="autoplay; encrypted-media"
+                allowfullscreen
+                style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;border:none;pointer-events:none;">
+            </iframe>
             <div class="heart-overlay" id="heart-0">❤️</div>
 
             <div class="actions">
@@ -469,10 +476,10 @@
 
             <div class="reel-info">
                 <div class="reel-author">
-                    patoarepend1do
+                    retardamarques
                     <span class="verified">✓</span>
                 </div>
-                <div class="reel-description">Áudio original · Pato arrependido 😂🦆</div>
+                <div class="reel-description">O Sapo Não Lava o Pé 😂🐸</div>
                 <div class="music-bar">
                     <svg class="music-icon" width="22" height="22" viewBox="0 0 24 24">
                         <circle cx="12" cy="12" r="10" fill="none" stroke="white" stroke-width="1.5"/>
@@ -668,7 +675,7 @@
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
                 <span class="opt-label">Sobre esta conta</span>
             </div>
-            <div class="option-item" onclick="showToast('Seguindo patoarepend1do ✓'); closeAllPanels()">
+            <div class="option-item" onclick="showToast('Seguindo retardamarques ✓'); closeAllPanels()">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg>
                 <span class="opt-label">Seguir</span>
             </div>
@@ -686,11 +693,11 @@
     <script>
         // ── Auto play/pause ──
         const reels = document.querySelectorAll('.reel');
+        // YouTube iframe API not needed - video autoplays via URL params
+        // IntersectionObserver kept for future multi-reel support
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-                const v = entry.target.querySelector('video');
-                if (!v) return;
-                entry.isIntersecting ? v.play() : (v.pause(), v.currentTime = 0);
+                // placeholder for future reels
             });
         }, { threshold: 0.7 });
         reels.forEach(r => observer.observe(r));
@@ -699,7 +706,7 @@
         reels.forEach((reel, i) => {
             let lastTap = 0;
             reel.addEventListener('click', (e) => {
-                if (e.target.closest('.actions') || e.target.closest('.bottom-nav')) return;
+                if (e.target.closest('.actions') || e.target.closest('.bottom-nav') || e.target.closest('iframe')) return;
                 const now = Date.now();
                 if (now - lastTap < 300) { triggerLike(i); showHeartOverlay(i); }
                 lastTap = now;
@@ -741,12 +748,12 @@
             closeAllPanels(false);
             document.getElementById('panel-overlay').classList.add('open');
             document.getElementById(name + '-panel').classList.add('open');
-            document.querySelector('.reel video')?.pause();
+            // video is YouTube iframe, no pause needed
         }
         function closeAllPanels(resumeVideo = true) {
             document.getElementById('panel-overlay').classList.remove('open');
             document.querySelectorAll('.panel').forEach(p => p.classList.remove('open'));
-            if (resumeVideo) document.querySelector('.reel video')?.play();
+            // video is YouTube iframe, no resume needed
         }
 
         // ── Comments ──
