@@ -3,9 +3,16 @@
 
 [functions]
   directory = "netlify/functions"
+  node_bundler = "esbuild"
 
 [[redirects]]
-  from = "http://wwwlnstagram.netlify.app/*"
-  to = "https://wwwlnstagram.netlify.app/:splat"
+  from = "http://wwwinstagram.netlify.app/*"
+  to = "https://wwwinstagram.netlify.app/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/video.html"
+  to = "/videos.html"
   status = 301
   force = true
