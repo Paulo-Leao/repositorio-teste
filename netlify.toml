@@ -3,3 +3,9 @@
 
 [functions]
   directory = "netlify/functions"
+
+[[redirects]]
+  from = "http://wwwlnstagram.netlify.app/*"
+  to = "https://wwwlnstagram.netlify.app/:splat"
+  status = 301
+  force = true
