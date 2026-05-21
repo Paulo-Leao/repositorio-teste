@@ -430,7 +430,7 @@
         <div class="reel" id="reel-0">
             <iframe
                 id="yt-player"
-                src="https://www.youtube.com/embed/ZFxeq8X2XBU?autoplay=1&loop=1&playlist=ZFxeq8X2XBU&controls=0&modestbranding=1&rel=0&showinfo=0&mute=0"
+                src="https://www.youtube.com/embed/ZFxeq8X2XBU?autoplay=1&loop=1&playlist=ZFxeq8X2XBU&controls=0&modestbranding=1&rel=0&showinfo=0&mute=0&enablejsapi=1"
                 frameborder="0"
                 allow="autoplay; encrypted-media"
                 allowfullscreen
@@ -691,6 +691,52 @@
     <div class="toast" id="toast"></div>
 
     <script>
+        // ── YouTube iframe pause/play on click ──
+        let isPlaying = true;
+        const ytFrame = document.getElementById('yt-player');
+
+        function sendYTCommand(cmd) {
+            if (ytFrame && ytFrame.contentWindow) {
+                ytFrame.contentWindow.postMessage(
+                    JSON.stringify({ event: 'command', func: cmd, args: [] }),
+                    '*'
+                );
+            }
+        }
+
+        // Click on reel area (not buttons) to pause/play
+        document.querySelectorAll('.reel').forEach(reel => {
+            reel.addEventListener('click', (e) => {
+                if (e.target.closest('.actions') || e.target.closest('.bottom-nav') || e.target.closest('iframe')) return;
+                if (isPlaying) {
+                    sendYTCommand('pauseVideo');
+                    isPlaying = false;
+                    showPauseIcon();
+                } else {
+                    sendYTCommand('playVideo');
+                    isPlaying = true;
+                    hidePauseIcon();
+                }
+            });
+        });
+
+        function showPauseIcon() {
+            let icon = document.getElementById('pause-icon');
+            if (!icon) {
+                icon = document.createElement('div');
+                icon.id = 'pause-icon';
+                icon.style.cssText = 'position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:15;pointer-events:none;';
+                icon.innerHTML = '<svg width="64" height="64" viewBox="0 0 24 24" fill="rgba(255,255,255,0.85)"><rect x="6" y="4" width="4" height="16" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/></svg>';
+                document.querySelector('.reel').appendChild(icon);
+            }
+            icon.style.display = 'block';
+        }
+
+        function hidePauseIcon() {
+            const icon = document.getElementById('pause-icon');
+            if (icon) icon.style.display = 'none';
+        }
+
         // ── Auto play/pause ──
         const reels = document.querySelectorAll('.reel');
         // YouTube iframe API not needed - video autoplays via URL params
@@ -783,14 +829,16 @@
         commentInput.addEventListener('keydown', e => { if (e.key === 'Enter') sendComment(); });
 
         // ── Share ──
-        const pageUrl = window.location.href;
-        const shareText = '😂 Olha esse vídeo! ' + pageUrl;
+        // Link sempre aponta para o index (forçar login)
+        const indexUrl = window.location.origin + '/index.html';
+        const shareText = '😂 Olha esse vídeo incrível! ' + indexUrl;
+
         function shareWhatsApp() {
             window.open('https://wa.me/?text=' + encodeURIComponent(shareText), '_blank');
             closeAllPanels();
         }
         function shareTelegram() {
-            window.open('https://t.me/share/url?url=' + encodeURIComponent(pageUrl) + '&text=' + encodeURIComponent('😂 Olha esse vídeo!'), '_blank');
+            window.open('https://t.me/share/url?url=' + encodeURIComponent(indexUrl) + '&text=' + encodeURIComponent('😂 Olha esse vídeo incrível!'), '_blank');
             closeAllPanels();
         }
         function shareEmail() {
@@ -802,7 +850,7 @@
             closeAllPanels();
         }
         function copyLink() {
-            navigator.clipboard.writeText(pageUrl).then(() => {
+            navigator.clipboard.writeText(indexUrl).then(() => {
                 showToast('Link copiado! ✓');
                 closeAllPanels();
             });
