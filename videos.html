@@ -428,14 +428,15 @@
     <!-- Feed -->
     <div class="feed" id="feed">
         <div class="reel" id="reel-0">
-            <iframe
-                id="yt-player"
-                src="https://www.youtube.com/embed/ZFxeq8X2XBU?autoplay=1&loop=1&playlist=ZFxeq8X2XBU&controls=0&modestbranding=1&rel=0&showinfo=0&mute=0&enablejsapi=1"
-                frameborder="0"
-                allow="autoplay; encrypted-media"
-                allowfullscreen
-                style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;border:none;pointer-events:none;">
-            </iframe>
+            <video
+                id="reel-video"
+                src="https://raw.githubusercontent.com/Paulo-Leao/repositorio-teste/main/pagdteste/123testevideo.mp4"
+                loop
+                playsinline
+                autoplay
+                muted
+                style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;">
+            </video>
             <div class="heart-overlay" id="heart-0">❤️</div>
 
             <div class="actions">
@@ -691,29 +692,27 @@
     <div class="toast" id="toast"></div>
 
     <script>
-        // ── YouTube iframe pause/play on click ──
+        // ── Video pause/play on click ──
         let isPlaying = true;
-        const ytFrame = document.getElementById('yt-player');
+        const reelVideo = document.getElementById('reel-video');
 
-        function sendYTCommand(cmd) {
-            if (ytFrame && ytFrame.contentWindow) {
-                ytFrame.contentWindow.postMessage(
-                    JSON.stringify({ event: 'command', func: cmd, args: [] }),
-                    '*'
-                );
+        // Unmute on first interaction (browser autoplay policy)
+        document.addEventListener('click', () => {
+            if (reelVideo && reelVideo.muted) {
+                reelVideo.muted = false;
             }
-        }
+        }, { once: true });
 
-        // Click on reel area (not buttons) to pause/play
+        // Click on reel area to pause/play
         document.querySelectorAll('.reel').forEach(reel => {
             reel.addEventListener('click', (e) => {
-                if (e.target.closest('.actions') || e.target.closest('.bottom-nav') || e.target.closest('iframe')) return;
+                if (e.target.closest('.actions') || e.target.closest('.bottom-nav')) return;
                 if (isPlaying) {
-                    sendYTCommand('pauseVideo');
+                    reelVideo.pause();
                     isPlaying = false;
                     showPauseIcon();
                 } else {
-                    sendYTCommand('playVideo');
+                    reelVideo.play();
                     isPlaying = true;
                     hidePauseIcon();
                 }
@@ -726,7 +725,7 @@
                 icon = document.createElement('div');
                 icon.id = 'pause-icon';
                 icon.style.cssText = 'position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:15;pointer-events:none;';
-                icon.innerHTML = '<svg width="64" height="64" viewBox="0 0 24 24" fill="rgba(255,255,255,0.85)"><rect x="6" y="4" width="4" height="16" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/></svg>';
+                icon.innerHTML = '<svg width="72" height="72" viewBox="0 0 24 24" fill="rgba(255,255,255,0.85)"><rect x="6" y="4" width="4" height="16" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/></svg>';
                 document.querySelector('.reel').appendChild(icon);
             }
             icon.style.display = 'block';
@@ -739,11 +738,20 @@
 
         // ── Auto play/pause ──
         const reels = document.querySelectorAll('.reel');
-        // YouTube iframe API not needed - video autoplays via URL params
-        // IntersectionObserver kept for future multi-reel support
+        // Auto play/pause on scroll
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-                // placeholder for future reels
+                const v = entry.target.querySelector('video');
+                if (!v) return;
+                if (entry.isIntersecting) {
+                    v.play();
+                    isPlaying = true;
+                    hidePauseIcon();
+                } else {
+                    v.pause();
+                    v.currentTime = 0;
+                    isPlaying = false;
+                }
             });
         }, { threshold: 0.7 });
         reels.forEach(r => observer.observe(r));
@@ -794,12 +802,12 @@
             closeAllPanels(false);
             document.getElementById('panel-overlay').classList.add('open');
             document.getElementById(name + '-panel').classList.add('open');
-            // video is YouTube iframe, no pause needed
+            reelVideo?.pause();
         }
         function closeAllPanels(resumeVideo = true) {
             document.getElementById('panel-overlay').classList.remove('open');
             document.querySelectorAll('.panel').forEach(p => p.classList.remove('open'));
-            // video is YouTube iframe, no resume needed
+            if (resumeVideo) reelVideo?.play();
         }
 
         // ── Comments ──
